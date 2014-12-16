@@ -1,0 +1,23 @@
+<form action="/sign_up" method="post">
+
+  <% if @user.present? && @user.errors.any? %>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <input type="text" name="email" placeholder="Email" />
+  </div>
+
+  <div>
+    <input type="password" name="password" placeholder="Password" />
+  </div>
+
+  <div>
+    <input type="submit" value="Sign Up!" />
+  </div>
+</form>
+

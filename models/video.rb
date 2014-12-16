@@ -1,3 +1,3 @@
 class Video < ActiveRecord::Base
-has_many_through
+has_and_belongs_to_many :zing
 end
