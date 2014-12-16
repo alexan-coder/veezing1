@@ -2,77 +2,34 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/reloader'
 require "pry"
+require 'sinatra/simple-authentication'
+require 'rack-flash'
 
-# get '/' do 
-# 	erb :index
-# end
+Sinatra::SimpleAuthentication.configure do |c|
+	c.use_password_confirmation = true
+end
 
-# get '/sign_up'
-# 	erb :sign_up
-# end
+use Rack::Flash, :sweep => true
 
-# post '/sign_up'
-# 	erb :sign_up
-# end
+register Sinatra::SimpleAuthentication
 
-# get '/login'
-# 	erb :login
-# end
-
-# post '/login'
-# 	erb :login
-# end
 
 require_relative "./models/user"
 require_relative "./models/zing"
 
 enable :sessions
 
-helpers do
-  def current_user
-    @current_user || nil
-  end
-
-  def current_user?
-    @current_user == nil ? false : true
-  end
-end
-
-# what does this do?
-# before do
-#   session[:cart] ||= []
-#   @errors ||= []
-#   @current_user = User.find_by(:id => session[:user_id])
-# end
 
 get "/" do
+	login_required
   erb :index
 end
 
-# get "/users" do
-#   if current_user?
-#     erb :profile
-#   else
-#     redirect('/login')
-#   end
-# end
-
-# get "/products" do
-#   @products = Product.all
-#   erb :products
-# end
 
 get "/zings" do
   erb :zing
 end
 
-# post "/cart/products" do
-#   product = Product.find_by(:id => params[:product_id])
-#   if product
-#     session[:cart] << product.product_name
-#   end
-#   redirect('/cart')
-# end
 
 get '/login' do
   erb :login
