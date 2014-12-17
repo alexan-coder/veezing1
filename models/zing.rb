@@ -1,3 +1,4 @@
 class Zing < ActiveRecord::Base
- belongs_to :users
+ belongs_to :user
+ belongs_to :video
 end

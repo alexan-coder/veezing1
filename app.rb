@@ -16,17 +16,25 @@ register Sinatra::SimpleAuthentication
 
 require_relative "./models/user"
 require_relative "./models/zing"
+require_relative "./models/video"
+
 
 enable :sessions
 
 
 get "/" do
 	login_required
+	@video = Video.first
   erb :index
 end
 
+get '/videos/:video_id' do
+	@video = Video.find(params[:video_id])
+	erb :video_show
 
-get "/zings" do
+end
+
+get "/user_zings" do
   erb :zing
 end
 
@@ -35,31 +43,31 @@ get '/login' do
   erb :login
 end
 
-post "/login" do
-  user = User.find_by(:email => params[:email])
-  if user && user.authenticate(params[:password])
-    session[:user_id] = user.id
-    redirect('/users')
-  else
-    @errors << "Invalid email or password. Try again!"
-    erb :login
-  end
-end
+# post "/login" do
+#   user = User.find_by(:email => params[:email])
+#   if user && user.authenticate(params[:password])
+#     session[:user_id] = user.id
+#     redirect('/users')
+#   else
+#     @errors << "Invalid email or password. Try again!"
+#     erb :login
+#   end
+# end
 
-get '/sign_up' do
-  erb :sign_up
-end
+# get '/sign_up' do
+#   erb :sign_up
+# end
 
-post "/sign_up" do
-  user = User.new(params)
-  if user.save
-    session[:user_id] = user.id
-    redirect('/users')
-  else
-    @user = user
-    erb :sign_up
-  end
-end
+# post "/sign_up" do
+#   user = User.new(params)
+#   if user.save
+#     session[:user_id] = user.id
+#     redirect('/users')
+#   else
+#     @user = user
+#     erb :sign_up
+#   end
+# end
 
 get "/session/logout" do
   session.clear
