@@ -9,9 +9,7 @@
 <h1>veezing.com</h1>
 <nav>
 <ul>
-  <li><a href="../login">login</a></li>
-  <li><a href="../sign_up">signup</a></li>
-  <li><a href="/zings/">my zings</a></li>
+  <li><a href="/zings/<%= current_user.id %>">my zings</a></li>
   <li><a href="/logout">logout</a></li>
 </ul>
 </nav>

@@ -32,7 +32,7 @@ end
 
 post '/videos/:video_id' do
   @video = Video.find(params[:video_id])
-  @new_zing = Zing.create(user_id: 1, video_id: @video.id) # make user_id: 1 refer to the current user
+  @new_zing = Zing.create(user_id: current_user.id, video_id: @video.id) # make user_id: 1 refer to the current user
   erb :video_show
 end
 
@@ -40,9 +40,9 @@ get "/zings/:user_id" do
   #getting user id
   @user = User.find(params[:user_id])
   #getting the users zings
-  @user_zings = Zing.where(user_id: @user)
+  @zings = Zing.where(user_id: @user.id)
   #getting all the video ids form the users zings
-  	@zing_videos = @user_zings.pluck(:video_id)
+  	@zing_videos = @zings.pluck(:video_id)
 
 
   erb :user_zings
