@@ -1,1 +1,9 @@
-this page should display a list of videos that the user has "zingged"
+<ul>
+<% @zing.each do |zing| %>
+	<li> 
+	<p><%= zing.user_id %></p>
+	<p><%= zing.video_id %></p>
+
+	</li>
+	<% end %>
+</ul>

@@ -1,0 +1,30 @@
+/*
+body {
+    background-color: #e8e8e7;
+}
+h1 {
+    font-family: aller-light;
+    color: white; 
+}
+
+nav {display:inline;
+}*/
+
+h1 {
+    font-family: aller-light;
+    color: orange; 
+}
+body {
+ text-align: center;
+ width: 100%;
+ font-family: "aller-light";
+}
+ul{
+ list-style: none;
+ padding: 0;
+}
+a{
+ color: red;
+ font-size:16px;
+ text-decoration: none;
+}
